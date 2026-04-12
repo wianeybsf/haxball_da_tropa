@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>𝑯𝐴𝑿𝐵𝑨𝐿𝑳 𝐷𝑨 𝑇𝑹𝑂𝑷𝐴</title>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="title">
+                HAXBALL DA TROPA
+            </h1>
+        </div>
+        
+        <div class="stats">
+            <table class="form">
+                <thead class="info">
+                    <tr>
+                        <th>GUILDA</th>
+                        <th>NOME</th>
+                        <th>JOGOS</th>
+                        <th>GOLS</th>
+                        <th>ASSISTÊNCIAS</th>
+                    </tr>
+                </thead>
+                <tbody class="inputs">
+                    <tr>
+                        <td><input type="text" id="insertGuild"></td>
+                        <td><input type="text" id="insertName"></td>
+                        <td><input type="number" id="insertMatches"></td>
+                        <td><input type="number" id="insertGoal"></td>
+                        <td><input type="number" id="insertAssist"></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <button id="addList">
+                ADICIONAR NA LISTA
+            </button>
+
+        </div>
+
+        <div class="table">
+            <table class="list">
+                <thead>
+                    <tr>
+                        <th>Guilda</th>
+                        <th>Nome</th>
+                        <th>Jogos</th>
+                        <th>Gols</th>
+                        <th>Assistências</th>
+                        <th>PPG</th>
+                        <th>G/Jogo</th>
+                        <th>A/Jogo</th>
+                    </tr>
+                </thead>
+                <tbody id="playerList">
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+<script src="scripts.js"></script>
+
+</body>
+</html>
