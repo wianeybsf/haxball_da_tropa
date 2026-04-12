@@ -63,19 +63,29 @@ async function carregar() {
 function renderizar() {
     const tbody = document.getElementById('playerList');
 
-    tbody.innerHTML = jogadores.map(p => {
+    tbody.innerHTML = jogadores.map((p, index) => {
         const ppg   = p.goals + p.assists;
         const gJogo = p.matches > 0 ? (p.goals / p.matches).toFixed(2) : '—';
         const aJogo = p.matches > 0 ? (p.assists / p.matches).toFixed(2) : '—';
 
+        let pos;
+        if (index === 0) pos = '<span style="color:#f5c842">🥇</span>';
+        else if (index === 1) pos = '<span style="color:#b0b8c1">🥈</span>';
+        else if (index === 2) pos = '<span style="color:#cd7f32">🥉</span>';
+        else pos = `<span style="color:#3d6080">${index + 1}</span>`;
+        
+        const guildColor = p.guild.toUpperCase() === 'HDT' ? '#f5c842' :
+                   p.guild.toUpperCase() === 'CDR' ? '#ff4444' :
+                   'var(--text)';
+
         return `<tr>
-            <td>${p.guild}</td>
+            <td>${pos}</td>
+            <td style="color:${guildColor}; text-shadow: 0 0 12px ${guildColor}66">${p.guild}</td>
             <td>${p.name}</td>
             <td>${p.matches}</td>
             <td>${p.goals}</td>
             <td>${p.assists}</td>
             <td>${ppg}</td>
-            <td>${p.goals}</td>
             <td>${gJogo}</td>
             <td>${aJogo}</td>
         </tr>`;
