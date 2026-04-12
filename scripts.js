@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getFirestore, collection, getDocs, setDoc, doc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { getFirestore, collection, getDocs, setDoc, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDLwnKqM9Ijry_zUzUtTjghIJfVp4eWPFE",
@@ -32,8 +32,21 @@ document.getElementById('addList').onclick = async function() {
     const assists = Number(document.getElementById('insertAssist').value);
 
     const id = guild + '_' + name;
+    const ref = doc(db, 'jogadores', id);
+    const existente = await getDoc(ref);
 
-    await setDoc(doc(db, 'jogadores', id), { guild, name, matches, goals, assists });
+    if (existente.exists()) {
+        const atual = existente.data();
+        await setDoc(ref, {
+            guild,
+            name,
+            matches: atual.matches + matches,
+            goals:   atual.goals   + goals,
+            assists: atual.assists + assists
+        });
+    } else {
+        await setDoc(ref, { guild, name, matches, goals, assists });
+    }
 
     carregar();
 };
@@ -59,6 +72,7 @@ function renderizar() {
             <td>${p.goals}</td>
             <td>${p.assists}</td>
             <td>${ppg}</td>
+            <td>${p.goals}</td>
             <td>${gJogo}</td>
             <td>${aJogo}</td>
         </tr>`;
