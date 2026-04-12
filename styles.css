@@ -121,6 +121,8 @@ body::before {
 table.form {
     width: 100%;
     border-collapse: collapse;
+    display: block;
+    overflow-x: auto;
 }
 
 table.form thead th {
