@@ -54,6 +54,9 @@ document.getElementById('addList').onclick = async function() {
 async function carregar() {
     const snapshot = await getDocs(collection(db, 'jogadores'));
     jogadores = snapshot.docs.map(d => d.data());
+
+    jogadores.sort((a, b) => b.goals - a.goals);
+
     renderizar();
 }
 
