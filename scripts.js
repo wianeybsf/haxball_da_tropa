@@ -1,36 +1,47 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, getDocs, setDoc, doc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDLwnKqM9Ijry_zUzUtTjghIJfVp4eWPFE",
+  authDomain: "haxball-ef25c.firebaseapp.com",
+  projectId: "haxball-ef25c",
+  storageBucket: "haxball-ef25c.firebasestorage.app",
+  messagingSenderId: "453472163512",
+  appId: "1:453472163512:web:b84497078cc7531bdbc64d",
+  measurementId: "G-H8Z6GZ9G5T"
+};
+
+const SENHA = 'wianeyfilh0';
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
 let jogadores = [];
 
-document.getElementById('addList').onclick = function() {
+document.getElementById('addList').onclick = async function() {
+    const senha = prompt('Digite a senha para editar:');
+    if (senha !== SENHA) {
+        alert('Senha incorreta!');
+        return;
+    }
+
     const guild   = document.getElementById('insertGuild').value;
     const name    = document.getElementById('insertName').value;
     const matches = Number(document.getElementById('insertMatches').value);
     const goals   = Number(document.getElementById('insertGoal').value);
     const assists = Number(document.getElementById('insertAssist').value);
 
-    const existente = jogadores.find(p => p.name === name && p.guild === guild);
+    const id = guild + '_' + name;
 
-    if (existente) {
-        existente.matches = matches;
-        existente.goals   = goals;
-        existente.assists = assists;
-    } else {
-        jogadores.push({ guild, name, matches, goals, assists });
-    }
+    await setDoc(doc(db, 'jogadores', id), { guild, name, matches, goals, assists });
 
-    salvar();
-    renderizar();
+    carregar();
 };
 
-function salvar() {
-    localStorage.setItem('jogadores', JSON.stringify(jogadores));
-}
-
-function carregar() {
-    const dados = localStorage.getItem('jogadores');
-    if (dados) {
-        jogadores = JSON.parse(dados);
-        renderizar();
-    }
+async function carregar() {
+    const snapshot = await getDocs(collection(db, 'jogadores'));
+    jogadores = snapshot.docs.map(d => d.data());
+    renderizar();
 }
 
 function renderizar() {
