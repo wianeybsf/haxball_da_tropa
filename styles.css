@@ -32,8 +32,10 @@ body {
     background-color: var(--bg);
     background-image: url('wallpaper.png');
     background-size: cover;
-    background-position: center;
+    background-position: center top;
     background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
 }
 
 body::before {
@@ -55,7 +57,7 @@ body::before {
 /* HEADER */
 .header {
     text-align: center;
-    margin-bottom: 56px;
+    margin-bottom: 20px;
     position: relative;
 }
 
@@ -65,10 +67,51 @@ body::before {
     letter-spacing: 6px;
     color: #ffffff;
     text-transform: uppercase;
-    margin-top: 55px;
+    margin-top: 30px;
     opacity: 0.9;
     text-shadow: 0 0 20px rgba(255, 255, 255, 0.6), 0 0 40px rgba(255, 255, 255, 0.2);
 }
+
+.divider {
+    width: 900px;
+    height: 1px;
+    margin: 30px auto 0px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+    border-radius: 999px;
+}
+
+.season {
+    font-family: 'CoolveticaIta', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 4px;
+    color: #ffffff;
+    text-align: center;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(59,142,255,0.06));
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 12px;
+    padding: 12px 36px;
+    display: inline-block;
+    margin: 0 auto 0%;
+    text-shadow: 0 0 20px rgba(255,255,255,0.3);
+    position: relative;
+    margin-top: 30px;
+}
+
+.season::before,
+.season::after {
+    content: '•';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(255,255,255,0.3);
+    font-size: 0.6rem;
+}
+
+.season::before { left: 14px; }
+.season::after  { right: 14px; }
 
 .title {
     font-family: 'CoolveticaIta', sans-serif;
@@ -122,8 +165,6 @@ body::before {
 table.form {
     width: 100%;
     border-collapse: collapse;
-    display: block;
-    overflow-x: auto;
 }
 
 table.form thead th {
@@ -302,6 +343,10 @@ table.list tbody tr:first-child td:nth-child(2) {
     .container { padding: 40px 14px 80px; }
     .title { font-size: 2.6rem; }
     .table { overflow-x: auto; }
+    body {
+        background-size: 250%;
+        background-position: center top;
+    }
 }
 
 table.list tbody td {
