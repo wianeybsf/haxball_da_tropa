@@ -29,13 +29,12 @@
 }
 
 body {
-    background-color: var(--bg);
+    min-height: 100vh;
     background-image: url('wallpaper.png');
     background-size: cover;
     background-position: center top;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    min-height: 100vh;
 }
 
 body::before {
