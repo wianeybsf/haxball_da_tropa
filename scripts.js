@@ -30,6 +30,7 @@ document.getElementById('addList').onclick = async function() {
     const matches = Number(document.getElementById('insertMatches').value);
     const goals   = Number(document.getElementById('insertGoal').value);
     const assists = Number(document.getElementById('insertAssist').value);
+    const price = document.getElementById('insertPrice').value || '';
 
     const id = guild + '_' + name;
     const ref = doc(db, 'jogadores', id);
@@ -42,10 +43,11 @@ document.getElementById('addList').onclick = async function() {
             name,
             matches: atual.matches + matches,
             goals:   atual.goals   + goals,
-            assists: atual.assists + assists
+            assists: atual.assists + assists,
+            price: price || atual.price || ''
         });
     } else {
-        await setDoc(ref, { guild, name, matches, goals, assists });
+        await setDoc(ref, { guild, name, matches, goals, assists, price });
     }
 
     carregar();
@@ -73,15 +75,16 @@ function renderizar() {
         else if (index === 1) pos = '<span style="color:#b0b8c1">🥈</span>';
         else if (index === 2) pos = '<span style="color:#cd7f32">🥉</span>';
         else pos = `<span style="color:#3d6080">${index + 1}</span>`;
-        
+
         const guildColor = p.guild.toUpperCase() === 'HDT' ? '#f5c842' :
-                   p.guild.toUpperCase() === 'CDR' ? '#ff4444' :
-                   'var(--text)';
+                           p.guild.toUpperCase() === 'CDR' ? '#ff4444' :
+                           'var(--text)';
 
         return `<tr>
             <td>${pos}</td>
             <td style="color:${guildColor}; text-shadow: 0 0 12px ${guildColor}66">${p.guild}</td>
             <td>${p.name}</td>
+            <td>${p.price || '—'}</td>
             <td>${p.matches}</td>
             <td>${p.goals}</td>
             <td>${p.assists}</td>
