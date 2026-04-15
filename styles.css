@@ -315,22 +315,32 @@ table.list tbody td:first-child {
     text-shadow: 0 0 12px rgba(245, 200, 66, 0.5);
 }
 
+/* guilda */
 table.list tbody td:nth-child(2) {
+    font-size: 1rem;
+}
+
+/* nome */
+table.list tbody td:nth-child(3) {
     color: var(--accent2);
     font-size: 1rem;
     text-shadow: 0 0 12px rgba(126, 200, 255, 0.5);
 }
 
+/* preço */
 table.list tbody td:nth-child(4) {
-    color: var(--accent2);
+    color: #00ff64;
+    text-shadow: 0 0 12px rgba(0, 255, 100, 0.6), 0 0 24px rgba(0, 255, 100, 0.3);
 }
 
+/* gols */
 table.list tbody td:nth-child(6) {
-    color: var(--accent);
+    color: var(--accent2);
 }
 
-table.list tbody tr:first-child td:nth-child(2) {
-    color: var(--accent2);
+/* PPG */
+table.list tbody td:nth-child(8) {
+    color: var(--accent);
 }
 
 ::-webkit-scrollbar { width: 5px; height: 5px; }
